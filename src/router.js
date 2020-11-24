@@ -18,6 +18,13 @@ export const constantRouterMap = [
         component: ChanceHistory,
         hidden: true,
         children: []
+    },
+    {
+        path: '/myFirst',
+        name: 'my_first',
+        component: ChanceHistory,
+        hidden: true,
+        children: []
     }
 ]
 export default new Router({
