@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import HelloWorld from './components/HelloWorld';
 import ChanceHistory from './components/ChanceHistory';
+import MyFirst from './components/MyFirst';
 Vue.use(Router);
 
 export const constantRouterMap = [
@@ -20,9 +21,9 @@ export const constantRouterMap = [
         children: []
     },
     {
-        path: '/myFirst',
+        path: '/my_first',
         name: 'my_first',
-        component: ChanceHistory,
+        component: MyFirst,
         hidden: true,
         children: []
     }

@@ -1,88 +1,146 @@
 <template>
-<div class="chance_history">
-
-    <el-container style="height: 500px; border: 1px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
-        <el-submenu index="1">
-            <template slot="title"><i class="el-icon-message"></i>导航一</template>
-            <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="1-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-submenu index="2">
-            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
-            <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-            <el-menu-item index="2-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>导航三</template>
-            <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-            <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        </el-menu>
-    </el-aside>
-    
-    <el-container>
-        <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-            <i class="el-icon-setting" style="margin-right: 15px"></i>
-            <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
-        </el-header>
-        
-        <el-main>
-        <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140">
-            </el-table-column>
-            <el-table-column prop="name" label="姓名" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址">
-            </el-table-column>
-        </el-table>
-        </el-main>
-    </el-container>
-    </el-container>
-
-
+<div class="my_first">
+<el-container>
+  <el-aside width="200px">
+    <el-image :src="src" style="height:150px;display:flex"></el-image>
+    <el-menu
+      default-active="0"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose" style="height:700px">
+      <el-menu-item index="1"  v-on:click="makeActive1('A')" >
+          <i class="el-icon-location"></i>
+          <span>本日出勤</span>
+      </el-menu-item>
+      <el-menu-item index="2" v-on:click="makeActive1('B')">
+        <i class="el-icon-menu"></i>
+        <span slot="title">在籍</span>
+      </el-menu-item>
+      <el-menu-item index="3" >
+        <i class="el-icon-document"></i>
+        <span slot="title">消费</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-setting"></i>
+        <span slot="title">联系</span>
+      </el-menu-item>
+    </el-menu>
+  </el-aside>
+  <el-container>
+    <el-image :src="src" style="height:150px"> </el-image>
+    <el-header>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu-item index="1">处理中心</el-menu-item>
+  <el-submenu index="2">
+    <template slot="title">我的工作台</template>
+    <el-menu-item index="2-1">选项1</el-menu-item>
+    <el-menu-item index="2-2">选项2</el-menu-item>
+    <el-menu-item index="2-3">选项3</el-menu-item>
+    <el-submenu index="2-4">
+      <template slot="title">选项4</template>
+      <el-menu-item index="2-4-1">选项1</el-menu-item>
+      <el-menu-item index="2-4-2">选项2</el-menu-item>
+      <el-menu-item index="2-4-3">选项3</el-menu-item>
+    </el-submenu>
+  </el-submenu>
+  <el-menu-item index="3" disabled>消息中心</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+</el-menu>
+    </el-header>
+    <el-main>
+ <div class="tab1" v-if="type === 'A'">
+<el-row :gutter="20" >
+  <el-col :span="6" ><div class="grid-content bg-purple">
+    <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+</el-row>
+<el-row :gutter="20" >
+  <el-col :span="6" ><div class="grid-content bg-purple">
+    <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:150px"> </el-image>   
+    </div></el-col>
+</el-row>
+      </div>
+ <div class="tab2" v-if="type === 'B'">
+<el-row :gutter="20" >
+  <el-col :span="6" ><div class="grid-content bg-purple">
+    <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+</el-row>
+<el-row :gutter="20" >
+  <el-col :span="6" ><div class="grid-content bg-purple">
+    <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple">
+     <el-image :src="src" style="height:100px"> </el-image>   
+    </div></el-col>
+</el-row>
+      </div>
+    </el-main>
+  </el-container>
+</el-container>
 </div>
+
 </template>
 
-
+<style>
+  .el-header, .el-footer {
+    background-color: #FFF;
+    color: rgb(235, 27, 27);
+    text-align: center;
+    line-height: 150px;
+  }
+  
+  .el-aside {
+    background-color:#FFF;
+    color: #333;
+    text-align: center;
+    line-height: 100px;
+  }
+  
+  .el-main {
+    background-color: #FFF;
+    color: #333;
+    text-align: center;
+  }
+  
+  body > .el-container {
+    margin-bottom: 40px;
+  }
+  
+</style>
 
 
 <script>
@@ -95,23 +153,30 @@ import pako from 'pako';
 Vue.use(ElementUI);
 Vue.use(http);
 Vue.use(pako);
+  export default {
 
-export default {
-    name: 'history',
+    name:"my_first",  
     data() {
-        const item = {
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-        };
-        return {
-            tableData: Array(20).fill(item)
-        }
+      return {
+       src: 'https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg',
+       type: '',
+       activeIndex:"0"
+      };
     },
     methods: {
-    },
-    mounted: function () {
-        this.init_data();
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      makeActive1(items){
+			// 模型改变，视图会自动更新
+			this.type = items;
+		}
     }
-}
+  }
 </script>
