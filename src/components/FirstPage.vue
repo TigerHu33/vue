@@ -164,19 +164,27 @@ Vue.use(pako);
       };
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      makeActive1(items){
-			// 模型改变，视图会自动更新
-			this.type = items;
-		}
+        handleOpen(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        handleSelect(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        makeActive1(items){
+        // 模型改变，视图会自动更新
+        this.type = items;
+      }
+      // getRequest(){
+      //   this.searchForm.limit = this.pageSize;
+      //   this.searchForm.currentPage = this.pageIndex;
+      //   //发送get请求,searchForm.offset ,searchForm.limit作为参数传入
+      //   let get_url = 'http://localhost:8081/history';
+      //   this.$http.get(get_url,{params : this.searchForm }).then(response => {
+      //   });
+      // }
     }
   }
 </script>
