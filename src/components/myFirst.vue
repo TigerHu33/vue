@@ -1,5 +1,5 @@
 <template>
-<div class="my_first">
+<div class="first_test">
 <el-container>
   <el-aside width="200px">
     <el-image :src="src" style="height:150px;display:flex"></el-image>
