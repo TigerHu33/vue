@@ -6,8 +6,10 @@ Vue.use(Router);
 export const constantRouterMap = [
     {
         path: '/',
+
         name: 'home_page',
         component: FirstPage,
+
         hidden: true,
         children: []
     },
