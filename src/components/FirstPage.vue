@@ -1,5 +1,17 @@
 <template>
 <div class="first_page">
+
+
+<el-row>
+  <el-button round>圆角按钮</el-button>
+  <el-button type="primary" round>主要按钮</el-button>
+  <el-button type="success" round>成功按钮</el-button>
+  <el-button type="info" round>信息按钮</el-button>
+  <el-button type="warning" round>警告按钮</el-button>
+  <el-button type="danger" round>危险按钮</el-button>
+</el-row>
+
+
 <el-container>
   <el-aside width="200px">
     <el-image :src="src" style="height:150px;display:flex"></el-image>
@@ -176,15 +188,20 @@ Vue.use(pako);
         makeActive1(items){
         // 模型改变，视图会自动更新
         this.type = items;
+      },
+      getRequest(){
+        this.searchForm.limit = this.pageSize;
+        this.searchForm.currentPage = this.pageIndex;
+        //发送get请求,searchForm.offset ,searchForm.limit作为参数传入
+        let get_url = 'http://localhost:3001/accounts';
+        this.$http.get(get_url).then(response => { 
+          console.log(response);
+        });
+
+
+        
       }
-      // getRequest(){
-      //   this.searchForm.limit = this.pageSize;
-      //   this.searchForm.currentPage = this.pageIndex;
-      //   //发送get请求,searchForm.offset ,searchForm.limit作为参数传入
-      //   let get_url = 'http://localhost:8081/history';
-      //   this.$http.get(get_url,{params : this.searchForm }).then(response => {
-      //   });
-      // }
+      
     }
   }
 </script>
