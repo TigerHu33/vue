@@ -1,16 +1,16 @@
 <template>
 <div class="first_page">
 
-
-<el-row>
-  <el-button round>圆角按钮</el-button>
-  <el-button type="primary" round>主要按钮</el-button>
-  <el-button type="success" round>成功按钮</el-button>
-  <el-button type="info" round>信息按钮</el-button>
-  <el-button type="warning" round>警告按钮</el-button>
-  <el-button type="danger" round>危险按钮</el-button>
-</el-row>
-
+<el-form label-width="160px" :inline="true">
+    <el-row>
+        <el-col :span="24" align="left">
+            <el-form-item label=" ">
+                <el-button plain type="primary" @click="getRequest" >GET検索</el-button>
+                <el-button plain type="primary" @click="postRequest" >POST検索</el-button>
+            </el-form-item>
+        </el-col>
+    </el-row>
+</el-form>
 
 <el-container>
   <el-aside width="200px">
@@ -160,11 +160,9 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import http from 'vue-resource';
-import pako from 'pako';
 
 Vue.use(ElementUI);
 Vue.use(http);
-Vue.use(pako);
   export default {
 
     name:"my_first",  
@@ -190,18 +188,23 @@ Vue.use(pako);
         this.type = items;
       },
       getRequest(){
-        this.searchForm.limit = this.pageSize;
-        this.searchForm.currentPage = this.pageIndex;
+        // this.searchForm.limit = this.pageSize;
+        // this.searchForm.currentPage = this.pageIndex;
         //发送get请求,searchForm.offset ,searchForm.limit作为参数传入
         let get_url = 'http://localhost:3001/accounts';
         this.$http.get(get_url).then(response => { 
-          console.log(response);
+          let res = JSON.stringify(response.bodyText);
+          console.log(response.data);
+          console.log(res);
         });
-
-
-        
+      },
+      postRequest(){
+        let post_url = 'http://localhost:3001/va/list';
+        this.$http.post(post_url,{}).then(response => { 
+          let res = response.body;
+          console.log(res);
+        });
       }
-      
     }
   }
 </script>
