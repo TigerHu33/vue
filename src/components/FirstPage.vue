@@ -1,18 +1,7 @@
 <template>
 <div class="first_page">
 
-<el-form label-width="160px" :inline="true">
-    <el-row>
-        <el-col :span="24" align="left">
-            <el-form-item label=" ">
-                <el-button plain type="primary" @click="getRequest" round >GET検索</el-button>
-                <el-button plain type="primary" @click="postRequest" round>POST検索</el-button>
-            </el-form-item>
-        </el-col>
-    </el-row>
-</el-form>
-
-<!-- <el-container>
+<el-container>
   <el-aside width="200px">
     <el-image :src="src" style="height:150px;display:flex"></el-image>
     <el-menu
@@ -122,7 +111,7 @@
       </div>
     </el-main>
   </el-container>
-</el-container> -->
+</el-container>
 
 
 </div>
@@ -189,26 +178,6 @@ Vue.use(http);
         makeActive1(items){
         // 模型改变，视图会自动更新
         this.type = items;
-      },
-      getRequest(){
-        //发送get请求,searchForm.offset ,searchForm.limit作为参数传入
-        let get_url = 'http://localhost:3001/accounts/balances';
-        let params = {params:{"accountId":"1234567","balances":"20000"}};
-        this.$http.get(get_url,params).then(response => {
-          // console.log('response',response);
-          let res = JSON.stringify(response.bodyText);
-          console.log(res);
-          
-        });
-      },
-      postRequest(){
-        let post_url = 'http://localhost:3001/transfer/transferfee';
-        let params = {params:{"accountId":"1234567"}};
-        this.$http.post(post_url,params,{emulateJSON:true}).then(response => { 
-          // console.log('response',response);
-          let res = JSON.stringify(response.bodyText);
-          console.log(res);
-        });
       }
     }
   }
